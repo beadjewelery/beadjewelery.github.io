@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>angry-cart.js</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/angry-cart.min.css">
+</head>
+<body>
+	
+	
+
+
+			<div class="col-12 pt-5 pb-5">
+				Корзина на сумму <span id="totalPrice">0</span> руб (<span id="cartCount">0</span>) <button class="btn btn-sm btn-danger" onclick="cart.clearCart()">Очистить</button>
+			</div>
+			<!-- /.col-12 -->
+
+			<div id="cartPreview" class="pb-5"></div>
+			<!-- /#cartPreview -->
+			
+			<div class="col-md-4">
+				<div class="card mt-3">
+					<div class="card-body">
+
+						<img src="https://www.turksandcaicosgrocerydelivery.com/wp-content/uploads/2017/08/Bananas-1LB.png" alt="">
+						<h3>Банан <span class="h3 text-warning">48.99 <sub>руб</sub></span></h3>
+
+						<button class="btn btn-sm btn-info mt-4" onclick="cart.addToCart(1, {title: 'Банан', price: 48.99, image: 'https://www.turksandcaicosgrocerydelivery.com/wp-content/uploads/2017/08/Bananas-1LB.png'})">В корзину</button>
+
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col-md-4 -->
+
+
+
+
+	<script src = "https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+	<script src="js/angry-cart.min.js"></script>
+
+	<script>
+
+		let cart = new AngryCart({
+			counter: '#cartCount',
+			totalPrice: '#totalPrice',
+		});
+
+		function angryCPR() {
+			let myCart = JSON.parse(localStorage.getItem(angryCartKey)), // "angryCartKey" - ключ корзины в localStorage (const)
+				renderBlock = document.getElementById('cartPreview');
+
+			/* Очищаем блок перед выводом */
+			renderBlock.innerHTML = '';
+
+			/* Выводим товары из корзины */
+			Array.from(myCart).forEach( function(product) {
+				renderBlock.insertAdjacentHTML('beforeEnd', `
+					<div class="d-flex">
+						<h5><strong>${product.data.title}</strong> <span class="text-muted">x ${product.quantity}</span> - <span class="text-warning">${product.data.price} руб</span></h5>
+						<button class="btn btn-sm btn-outline-danger ml-3" onclick="cart.removeFromCart(${product.product_id})">x</button>
+					</div>
+				`);
+			});
+		}
+
+	</script>
+
+</body>
+</html>

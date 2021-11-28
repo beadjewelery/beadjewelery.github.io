@@ -1,0 +1,8 @@
+@font-face {
+	font-family: Kurale; /* Имя шрифта */
+	src: url(../fonts/font.ttf); /* Путь к файлу со шрифтом */
+}
+
+* {
+	font-family: Kurale; /* Имя шрифта */
+}

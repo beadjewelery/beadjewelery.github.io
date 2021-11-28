@@ -1,0 +1,26 @@
+a {
+	text-decoration: none;
+	color: gray;
+}
+
+a:hover {
+	transition: 0.2s;
+	color: #fd7532;
+	text-decoration: none;
+}
+
+nav {
+	background-color: #ffb18a;
+	padding: 5px;
+}
+
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+.right_btns {
+	display: inline-block;
+	padding: 10px;
+	text-align: center;
+}
